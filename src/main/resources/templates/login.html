@@ -51,6 +51,17 @@
               </label>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-6">
+              <input type="text" class="form-control" name="verifyCode" placeholder="请输入验证码" required="true">
+            </div>
+            <div class="col-6">
+              <img alt="单击图片刷新！" class="pointer" th:src="@{/common/kaptcha}"
+                   onclick="this.src='/common/kaptcha?d='+new Date()*1">
+            </div>
+          </div>
+
           <!-- /.col -->
           <div class="col-4">
             <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
