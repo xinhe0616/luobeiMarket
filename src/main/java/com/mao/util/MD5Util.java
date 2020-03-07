@@ -1,4 +1,4 @@
-package com.mao.config;
+package com.mao.util;
 
 import java.security.MessageDigest;
 

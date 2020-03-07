@@ -21,6 +21,7 @@ public class LoginController {
 
     @RequestMapping("/admin/starter")
     public String starter(){
+        System.out.println("进入start从1");
         return "/admin/starter";
     }
     @RequestMapping({"","/index"})
@@ -57,6 +58,9 @@ public class LoginController {
                 System.out.println("账号或者密码错误");
                 return "/login";
         }
-        return "/admin/starter";
+        session.setAttribute("loginUser", user.getLoginUserName());
+        System.out.println("进入start从2");
+//        session.setAttribute("loginUser","admin");
+        return "redirect:/admin/starter";
     }
 }

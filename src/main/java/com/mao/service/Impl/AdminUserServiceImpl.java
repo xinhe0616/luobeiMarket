@@ -1,6 +1,6 @@
 package com.mao.service.Impl;
 
-import com.mao.config.MD5Util;
+import com.mao.util.MD5Util;
 import com.mao.dao.AdminUserMapper;
 import com.mao.entity.AdminUser;
 import com.mao.service.AdminUserService;
