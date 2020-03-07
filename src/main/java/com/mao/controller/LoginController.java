@@ -14,7 +14,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-
+    @RequestMapping("/test")
+    public String test(){
+        return "test";
+    }
 
     @Resource
     private AdminUserService adminUserService;
