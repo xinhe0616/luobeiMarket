@@ -539,7 +539,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.0): carousel.js
+   * Bootstrap (v4.1.0): carousel.js.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -552,7 +552,7 @@
      */
     var NAME = 'carousel';
     var VERSION = '4.1.0';
-    var DATA_KEY = 'bs.carousel';
+    var DATA_KEY = 'bs.carousel.js';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
     var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
@@ -596,20 +596,20 @@
       CAROUSEL: 'carousel',
       ACTIVE: 'active',
       SLIDE: 'slide',
-      RIGHT: 'carousel-item-right',
-      LEFT: 'carousel-item-left',
-      NEXT: 'carousel-item-next',
-      PREV: 'carousel-item-prev',
-      ITEM: 'carousel-item'
+      RIGHT: 'carousel.js-item-right',
+      LEFT: 'carousel.js-item-left',
+      NEXT: 'carousel.js-item-next',
+      PREV: 'carousel.js-item-prev',
+      ITEM: 'carousel.js-item'
     };
     var Selector = {
       ACTIVE: '.active',
-      ACTIVE_ITEM: '.active.carousel-item',
-      ITEM: '.carousel-item',
-      NEXT_PREV: '.carousel-item-next, .carousel-item-prev',
-      INDICATORS: '.carousel-indicators',
+      ACTIVE_ITEM: '.active.carousel.js-item',
+      ITEM: '.carousel.js-item',
+      NEXT_PREV: '.carousel.js-item-next, .carousel.js-item-prev',
+      INDICATORS: '.carousel.js-indicators',
       DATA_SLIDE: '[data-slide], [data-slide-to]',
-      DATA_RIDE: '[data-ride="carousel"]'
+      DATA_RIDE: '[data-ride="carousel.js"]'
       /**
        * ------------------------------------------------------------------------
        * Class Definition
@@ -647,7 +647,7 @@
 
       _proto.nextWhenVisible = function nextWhenVisible() {
         // Don't call next when the page isn't visible
-        // or the carousel or its parent isn't visible
+        // or the carousel.js or its parent isn't visible
         if (!document.hidden && $$$1(this._element).is(':visible') && $$$1(this._element).css('visibility') !== 'hidden') {
           this.next();
         }
@@ -755,9 +755,9 @@
 
           if ('ontouchstart' in document.documentElement) {
             // If it's a touch-enabled device, mouseenter/leave are fired as
-            // part of the mouse compatibility events on first tap - the carousel
+            // part of the mouse compatibility events on first tap - the carousel.js
             // would stop cycling until user tapped out of it;
-            // here, we listen for touchend, explicitly pause the carousel
+            // here, we listen for touchend, explicitly pause the carousel.js
             // (as if it's the second time we tap on it, mouseenter compat event
             // is NOT fired) and after a timeout (to allow for mouse compatibility
             // events to fire) we explicitly restart cycling
