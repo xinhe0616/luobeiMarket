@@ -21,7 +21,10 @@ public class CategoryController {
 
     @Resource
     private CategoryService categoryService;
-
+    @GetMapping("/coupling-test")
+    public String couplingTest(HttpServletRequest request) {
+        return "/coupling";
+    }
     @GetMapping("/categories")
     public String categoriesPage(HttpServletRequest request, @RequestParam("categoryLevel") Byte categoryLevel, @RequestParam("parentId") Long parentId, @RequestParam("backParentId") Long backParentId) {
         if (categoryLevel == null || categoryLevel < 1 || categoryLevel > 3) {
