@@ -21,10 +21,26 @@ public class CategoryController {
 
     @Resource
     private CategoryService categoryService;
-    @GetMapping("/coupling-test")
+    @GetMapping("/coupling")
     public String couplingTest(HttpServletRequest request) {
-        return "/coupling";
+        request.setAttribute("path", "coupling-test");
+        //查询所有的一级分类
+        List<GoodsCategory> firstLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(0L), CategoryEnum.LEVEL_ONE.getLevel());
+        if (!CollectionUtils.isEmpty(firstLevelCategories)) {
+            //查询一级分类列表中第一个实体的所有二级分类
+            List<GoodsCategory> secondLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(firstLevelCategories.get(0).getCategoryId()), CategoryEnum.LEVEL_TWO.getLevel());
+            if (!CollectionUtils.isEmpty(secondLevelCategories)) {
+                //查询二级分类列表中第一个实体的所有三级分类
+                List<GoodsCategory> thirdLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(secondLevelCategories.get(0).getCategoryId()), CategoryEnum.LEVEL_THREE.getLevel());
+                request.setAttribute("firstLevelCategories", firstLevelCategories);
+                request.setAttribute("secondLevelCategories", secondLevelCategories);
+                request.setAttribute("thirdLevelCategories", thirdLevelCategories);
+                return "coupling";
+            }
+        }
+        return "error/error_5xx";
     }
+
     @GetMapping("/categories")
     public String categoriesPage(HttpServletRequest request, @RequestParam("categoryLevel") Byte categoryLevel, @RequestParam("parentId") Long parentId, @RequestParam("backParentId") Long backParentId) {
         if (categoryLevel == null || categoryLevel < 1 || categoryLevel > 3) {
