@@ -12,7 +12,7 @@ public class MyWebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(adminLoginInterpret)
-                .addPathPatterns("/admin/**");
+//        registry.addInterceptor(adminLoginInterpret);
+//                .addPathPatterns("/admin/**");
     }
 }

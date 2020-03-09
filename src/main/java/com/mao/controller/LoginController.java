@@ -3,10 +3,10 @@ package com.mao.controller;
 import com.mao.entity.AdminUser;
 import com.mao.service.AdminUserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.thymeleaf.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -22,10 +22,10 @@ public class LoginController {
     @Resource
     private AdminUserService adminUserService;
 
-    @RequestMapping("/admin/starter")
+    @RequestMapping("/starter")
     public String starter(){
         System.out.println("进入start从1");
-        return "/admin/starter";
+        return "/starter";
     }
     @RequestMapping({"","/index"})
     public String index(){
@@ -42,6 +42,7 @@ public class LoginController {
         @RequestParam("verifyCode") String verify,
         HttpSession session
     ){
+
         if(StringUtils.isEmpty(name) || StringUtils.isEmpty(pwd)) {
             session.setAttribute("loginError","用户名或者密码为空");
             System.out.println("用户名或者密码为空");
@@ -63,7 +64,8 @@ public class LoginController {
         }
         session.setAttribute("loginUser", user.getLoginUserName());
         System.out.println("进入start从2");
+
 //        session.setAttribute("loginUser","admin");
-        return "redirect:/admin/starter";
+        return "redirect:/starter";
     }
 }
