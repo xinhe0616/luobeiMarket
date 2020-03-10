@@ -85,6 +85,7 @@ public class CategoryServiceImpl implements CategoryService {
         List<CategoryVo> newBeeMallIndexCategoryVOS = new ArrayList<>();
         //获取一级分类的固定数量的数据
         List<GoodsCategory> firstLevelCategories = goodsCategoryMapper.selectByLevelAndParentIdsAndNumber(Collections.singletonList(0L), CategoryEnum.LEVEL_ONE.getLevel(), Constants.INDEX_CATEGORY_NUMBER);
+        System.out.println(firstLevelCategories);
         if (!CollectionUtils.isEmpty(firstLevelCategories)) {
             List<Long> firstLevelCategoryIds = firstLevelCategories.stream().map(GoodsCategory::getCategoryId).collect(Collectors.toList());
             //获取二级分类的数据

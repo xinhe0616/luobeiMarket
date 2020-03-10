@@ -43,6 +43,10 @@ public class LoginController {
     @GetMapping({"/index", "/"})
     public String indexPage(HttpServletRequest request) {
         List<CategoryVo> categories = categoryService.getCategoriesForIndex();
+        for (CategoryVo categorie:categories){
+            System.out.println(categorie);
+        }
+
         if (CollectionUtils.isEmpty(categories)) {
             return "error/error_5xx";
         }
