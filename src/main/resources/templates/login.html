@@ -3,90 +3,77 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Log in</title>
+  <title>newbee-mall管理系统 | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link rel="shortcut icon" th:href="@{dist/img/favicon.png}"/>
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="dist/extra/font-awesome.min.css">
+  <link rel="stylesheet" th:href="@{dist/css/font-awesome.min.css}">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="dist/extra/ionicons.min.css">
+  <link rel="stylesheet" th:href="@{dist/css/ionicons.min.css}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{dist/css/adminlte.min.css}">
+  <style>
+    canvas {
+      display: block;
+      vertical-align: bottom;
+    }
+    #particles {
+      background-color: #F7FAFC;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+  </style>
 </head>
 <body class="hold-transition login-page">
+<div id="particles">
+</div>
 <div class="login-box">
-  <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+  <div class="login-logo" style="color: #1baeae;">
+    <img th:src="@{/mall/image/new-bee-logo-3.png}" style="    height: 58px;float: left;margin-left: 10px;">
+    <h1>管理系统登陆</h1>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <div th:if="${not #strings.isEmpty(session.loginError)}" class="form-group">
-        <p th:text="${session.loginError}" class="login-box-msg">Sign in to start your session</p>
-      </div>
-      <div th:if="${#strings.isEmpty(session.loginError)}" class="form-group">
-        <p  class="login-box-msg">Sign in to start your session</p>
-      </div>
-
-
-      <form action="/login" method="post">
-        <div class="form-group has-feedback">
-          <input type="text" class="form-control" placeholder="账号", name="name">
-          <span class="fa fa-envelope form-control-feedback"></span>
+      <p class="login-box-msg"> NewBee MALL , Let's Go !</p>
+      <form th:action="@{login}" method="post">
+        <div th:if="${not #strings.isEmpty(session.errorMsg)}" class="form-group">
+          <div class="alert alert-danger" th:text="${session.errorMsg}"></div>
         </div>
         <div class="form-group has-feedback">
-          <input type="password" class="form-control" placeholder="密码", name="pwd">
+          <span class="fa fa-user form-control-feedback"></span>
+          <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入账号"
+                 required="true">
+        </div>
+        <div class="form-group has-feedback">
           <span class="fa fa-lock form-control-feedback"></span>
+          <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码"
+                 required="true">
         </div>
         <div class="row">
+          <div class="col-6">
+            <input type="text" class="form-control" name="verifyCode" placeholder="请输入验证码" required="true">
+          </div>
+          <div class="col-6">
+            <img alt="单击图片刷新！" class="pointer" th:src="@{/common/kaptcha}"
+                 onclick="this.src='/common/kaptcha?d='+new Date()*1">
+          </div>
+        </div>
+        <div class="form-group has-feedback"></div>
+        <div class="row">
           <div class="col-8">
-            <div class="checkbox icheck">
-              <label>
-                <input type="checkbox"> Remember Me
-              </label>
-            </div>
           </div>
-
-          <div class="row">
-            <div class="col-6">
-              <input type="text" class="form-control" name="verifyCode" placeholder="请输入验证码" required="true">
-            </div>
-            <div class="col-6">
-              <img alt="单击图片刷新！" class="pointer" th:src="@{/common/kaptcha}"
-                   onclick="this.src='/common/kaptcha?d='+new Date()*1">
-            </div>
-          </div>
-
-          <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat">登录
+            </button>
           </div>
-          <!-- /.col -->
         </div>
       </form>
 
-      <div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fa fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fa fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-      </div>
-      <!-- /.social-auth-links -->
-
-      <p class="mb-1">
-        <a href="#">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-      </p>
     </div>
     <!-- /.login-card-body -->
   </div>
@@ -94,19 +81,10 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="../static/plugins/jquery/jquery.min.js"></script>
+<script th:src="@{plugins/jquery/jquery.min.js}"></script>
 <!-- Bootstrap 4 -->
-<script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- iCheck -->
-<script src="../static/plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass   : 'iradio_square-blue',
-      increaseArea : '20%' // optional
-    })
-  })
-</script>
+<script th:src="@{plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{dist/js/plugins/particles.js}"></script>
+<script th:src="@{dist/js/login-bg-particles.js}"></script>
 </body>
 </html>
